@@ -46,7 +46,7 @@ export default function cardiffFormatter({
 }
 
 export function addImport(s: string): string {
-  return `IMPORT / ${s}`;
+  return `IMPORT - ${s}`;
 }
 
 export function formatOptions(options: Array<string>): Array<string> {
