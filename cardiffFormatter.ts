@@ -1,6 +1,6 @@
 import { isNotUndefinedOrNull } from "https://deno.land/x/fae@v0.6.2/utils/is.ts";
 
-export interface cardiffFormatterParam {
+interface cardiffFormatterParam {
   options: Array<string>;
   standardEquipements: Array<string>;
   notAvailableStandardEquipements: Array<string>;
