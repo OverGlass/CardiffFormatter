@@ -7,13 +7,18 @@ interface cardiffFormatterParam {
   isImport: boolean;
 }
 
-export function isCardiffFormatterParamTypeSafe(payload: any): boolean {
+export function isCardiffFormatterParamTypeSafe(
+  payload: any
+): boolean {
   const predicateType = payload as cardiffFormatterParam;
-  if (!payload && Object.keys(payload).length < 4) return false;
+  if (!payload && Object.keys(payload).length < 4)
+    return false;
   return (
     predicateType &&
     isInstanceOfBoolean(predicateType.isImport) &&
-    isInstanceOfArray(predicateType.notAvailableStandardEquipements) &&
+    isInstanceOfArray(
+      predicateType.notAvailableStandardEquipements
+    ) &&
     isInstanceOfArray(predicateType.options) &&
     isInstanceOfArray(predicateType.standardEquipements)
   );
@@ -38,7 +43,9 @@ export default function cardiffFormatter({
   const formatedText = [
     ...formatOptions(options),
     ...formatStandardEquipements(standardEquipements),
-    ...formatNotAvailableStandardEquipements(notAvailableStandardEquipements),
+    ...formatNotAvailableStandardEquipements(
+      notAvailableStandardEquipements
+    ),
   ]
     .join(" ")
     .slice(0, -2);
@@ -49,8 +56,13 @@ export function addImport(s: string): string {
   return `IMPORT - ${s}`;
 }
 
-export function formatOptions(options: Array<string>): Array<string> {
-  return mapTrimAndReplaceSlashInToPipe((o: string) => `*${o} /`, options);
+export function formatOptions(
+  options: Array<string>
+): Array<string> {
+  return mapTrimAndReplaceSlashInToPipe(
+    (o: string) => `*${o} /`,
+    options
+  );
 }
 
 export function formatStandardEquipements(
@@ -71,7 +83,9 @@ export function formatNotAvailableStandardEquipements(
   );
 }
 
-export function trimAndReplaceSlashInToPipe(s: string): string {
+export function trimAndReplaceSlashInToPipe(
+  s: string
+): string {
   return s.trim().replace(/\//g, "|");
 }
 
@@ -80,7 +94,7 @@ function mapTrimAndReplaceSlashInToPipe(
   array: Array<string>
 ): Array<string> {
   return array
-    .filter((el) => el.length > 1)
-    .map((x) => f(trimAndReplaceSlashInToPipe(x)))
+    .filter(el => el.length > 1)
+    .map(x => f(trimAndReplaceSlashInToPipe(x)))
     .sort();
 }
